@@ -30,17 +30,14 @@
         document
             .getElementById("loginForm")
             .addEventListener("submit", function (event) {
-                console.log("hi");
                 const username = document.getElementById("username").value;
                 const password = document.getElementById("pwd").value; // Fix the ID here
                 console.log(username === "admin" && password === "admin");
                 // Check if the entered credentials match the admin user
                 if (username === "admin" && password === "admin") {
                     // Credentials are correct, allow form submission
-                    console.log("heiiei");
                     document.getElementById("loginError").textContent = "";
                 } else {
-                    console.log("heiiei2222");
                     // Display error message and prevent form submission
                     document.getElementById("loginError").textContent =
                         "Invalid username or password";
