@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* justify-content: center; */
+        }
+
+        header {
+            background-color: #00165e;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        #search {
+        text-align: left;
+        margin: 20px;
+        padding: 20px;
+        /* border: 1px solid #ccc; */
+        border-radius: 8px;
+        /* background-color: #f4f4f4; */
+        /* justify-content: center; */
+    }
+
+    #search h1 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #333;
+        
+        /* text-align: center; */
+    }
+
+    #searchInput {
+        padding: 18px; /* Reduce padding for a smaller size */
+        width: 40%; /* Adjust width as needed */
+        font-size: 14px; /* Reduce font size */
+        margin-right: 10px;
+        margin-left:5px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        /* text-align: center; Center align the text field */
+    }
+
+    #search button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #search button:hover {
+        background-color: #0056b3;
+    }
+
+    #results {
+        margin-top: 20px;
+        /* text-align: center; */
+        justify-content: center;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- <h1>This is Home</h1> -->
+        <nav>
+            <h1>
+                <a href="">CineRate</a>
+            </h1>
+            <a href="login.html">Login</a>
+            <a href="signup.html">Signup</a>
+        </nav>
+    </header>
+
+<div id="search"><h1 >Movie Search App</h1>
+    <input type="text" id="searchInput" placeholder="Enter movie title">
+    <button onclick="searchMovies()">Search</button>
+    <div id="results"></div>
+</div>
+    
+    
+    <script >
+        // require('dotenv').config();
+        const apiKey ='your-api-key-here';;
+        // Replace with your TMDb API key
+    
+        async function searchMovies() {
+            const searchInput = document.getElementById('searchInput').value;
+    
+            // Make sure the search query is not empty
+            if (!searchInput.trim()) {
+                alert('Please enter a valid movie title.');
+                return;
+            }
+    
+            const apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(searchInput)}`;
+    
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+    
+                // Check if the request was successful
+                if (response.ok) {
+                    displayResults(data.results);
+                } else {
+                    alert(`Error: ${data.status_message}`);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                alert('An error occurred while fetching data.');
+            }
+        }
+    
+        function displayResults(movies) {
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+    
+            if (movies.length === 0) {
+                resultsContainer.innerHTML = '<p>No results found.</p>';
+                return;
+            }
+    
+            const ul = document.createElement('ul');
+    
+            movies.forEach(movie => {
+                const li = document.createElement('li');
+                li.textContent = movie.title;
+                ul.appendChild(li);
+            });
+    
+            resultsContainer.appendChild(ul);
+        }
+        
+    </script> 
+</body>
+
+</html>
