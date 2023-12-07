@@ -21,7 +21,13 @@
         <span id="signup">Don't have an account? <a href="signup.html">SignUp</a></span>
         <p id="loginError" style="color: red;"></p>
     </form>
-    <script>document
+    <script>
+        document.getElementById('back-to-home').addEventListener('click', function () {
+            // Navigate to the specified URL when the button is clicked
+            window.location.href = 'home.html';
+        });
+
+        document
             .getElementById("loginForm")
             .addEventListener("submit", function (event) {
                 console.log("hi");
