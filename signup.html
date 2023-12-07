@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+    </link>
+</head>
+
+<body>
+
+    <button type="button" id="back-to-home">Back to Home</button>
+    <br>
+    <br>
+    <h2>Signup</h2>
+    <form id="signupForm" action="home.html">
+        <input type="text" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+        <button type="submit">SignUp</button>
+        <br>
+        <br>
+        <span id="signup">Already have an account? <a href="login.html">Login</a></span>
+        <p id="passwordError" style="color: red;"></p>
+    </form>
+    <script>
+        // Add an event listener to the "Back to Home" button
+        document.getElementById('back-to-home').addEventListener('click', function () {
+            // Navigate to the specified URL when the button is clicked
+            window.location.href = 'home.html';
+        });
+
+        // Add an event listener to the form for password verification
+        document.getElementById('signupForm').addEventListener('submit', function (event) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Check if password and confirm password match
+            if (password !== confirmPassword) {
+                document.getElementById('passwordError').textContent = 'Passwords do not match';
+                event.preventDefault(); // Prevent form submission
+            } else {
+                document.getElementById('passwordError').textContent = ''; // Clear error message
+            }
+        });
+    </script>
+</body>
+
+</html>

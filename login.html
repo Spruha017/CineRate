@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+    </link>
+</head>
+
+<body>
+    <button type="button" id="back-to-home">Back to Home</button> <br>
+    <br>
+    <h2>Login</h2>
+    <form id="loginForm" action="home.html">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="pwd" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <br><br>
+        <span id="signup">Don't have an account? <a href="signup.html">SignUp</a></span>
+        <p id="loginError" style="color: red;"></p>
+    </form>
+    <script>document
+            .getElementById("loginForm")
+            .addEventListener("submit", function (event) {
+                console.log("hi");
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("pwd").value; // Fix the ID here
+                console.log(username === "admin" && password === "admin");
+                // Check if the entered credentials match the admin user
+                if (username === "admin" && password === "admin") {
+                    // Credentials are correct, allow form submission
+                    console.log("heiiei");
+                    document.getElementById("loginError").textContent = "";
+                } else {
+                    console.log("heiiei2222");
+                    // Display error message and prevent form submission
+                    document.getElementById("loginError").textContent =
+                        "Invalid username or password";
+                    event.preventDefault();
+                }
+            });</script>
+</body>
+
+</html>
